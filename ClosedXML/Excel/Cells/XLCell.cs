@@ -1486,7 +1486,8 @@ namespace ClosedXML.Excel
             {
                 // May fail for formula evaluation
                 value = default;
-                return false;
+                return true;
+                //return false;
             }
 
             if (isNullable && (currentValue == null || currentValue is string s && String.IsNullOrEmpty(s)))

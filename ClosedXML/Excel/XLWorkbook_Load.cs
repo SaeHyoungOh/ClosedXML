@@ -1361,10 +1361,11 @@ namespace ClosedXML.Excel
         private double GetInsetValue(string value)
         {
             String v = value.Trim();
-            if (v.EndsWith("pt"))
-                return Double.Parse(v.Substring(0, v.Length - 2), CultureInfo.InvariantCulture) / 72.0;
-            else
-                return Double.Parse(v.Substring(0, v.Length - 2), CultureInfo.InvariantCulture);
+            double result;
+            while (!double.TryParse(v, out result))
+                v = v.Remove(v.Length - 1);
+
+            return result;
         }
 
         private static void LoadTextBoxStyle<T>(IXLDrawing<T> xlDrawing, XAttribute attStyle)
